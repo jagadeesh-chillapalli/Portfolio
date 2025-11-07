@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jagadeesh Chillapalli — Portfolio</title>
+  <meta name="description" content="Cinematic video editor portfolio — Jagadeesh Chillapalli" />
+  
+<style>
+:root {
+  --bg: #000000;
+  --card: rgba(255, 255, 255, 0.08);
+  --text: #e6eef8;
+  --muted: #9aa4b2;
+  --glass-border: rgba(255, 255, 255, 0.04);
+  --accent-1: #7c3aed;
+  --accent-2: #8b5cf6;
+  --accent-3: #ec4899;
+  --pink: #ffaaaa;
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Inter', system-ui, -apple-system, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.45;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.bg-effects {
+  position:fixed;
+  inset:0;
+  z-index:-50;
+  pointer-events:none;
+  opacity:0.68;
+  animation: colorBreathe 28s ease-in-out infinite;
+}
+.gradient-orbs {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(600px at 15% 25%, rgba(255,170,170,0.11), transparent 55%),
+    radial-gradient(750px at 85% 70%, rgba(255,170,170,0.09), transparent 55%),
+    radial-gradient(550px at 50% 90%, rgba(255,255,255,0.04), transparent 60%);
+  filter: blur(110px);
+  animation: colorBreathe 28s ease-in-out infinite;
+  opacity: 0.65;
+}
+
+@keyframes colorBreathe {
+  0%    { background: 
+            radial-gradient(600px at 15% 25%, rgba(255,170,170,0.11), transparent 55%),
+            radial-gradient(750px at 85% 70%, rgba(255,170,170,0.09), transparent 55%),
+            radial-gradient(550px at 50% 90%, rgba(255,255,255,0.04), transparent 60%); }
+  25%   { background: 
+            radial-gradient(600px at 15% 25%, rgba(255,182,160,0.11), transparent 55%),
+            radial-gradient(750px at 85% 70%, rgba(255,192,170,0.09), transparent 55%),
+            radial-gradient(550px at 50% 90%, rgba(255,220,200,0.04), transparent 60%); }
+  50%   { background: 
+            radial-gradient(600px at 15% 25%, rgba(235,160,255,0.10), transparent 55%),
+            radial-gradient(750px at 85% 70%, rgba(215,170,255,0.08), transparent 55%),
+            radial-gradient(550px at 50% 90%, rgba(245,225,255,0.04), transparent 60%); }
+  75%   { background: 
+            radial-gradient(600px at 15% 25%, rgba(255,200,170,0.11), transparent 55%),
+            radial-gradient(750px at 85% 70%, rgba(255,210,180,0.09), transparent 55%),
+            radial-gradient(550px at 50% 90%, rgba(255,235,215,0.04), transparent 60%); }
+  100%  { background: 
+            radial-gradient(600px at 15% 25%, rgba(255,170,170,0.11), transparent 55%),
+            radial-gradient(750px at 85% 70%, rgba(255,170,170,0.09), transparent 55%),
+            radial-gradient(550px at 50% 90%, rgba(255,255,255,0.04), transparent 60%); }
+}
+.film-grain {
+  position:absolute;
+  inset:0;
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4"/><feComponentTransfer><feFuncA type="discrete" tableValues="0 0 0 0 1 1"/></feComponentTransfer></filter><rect width="100" height="100" filter="url(%23n)" opacity="0.22"/></svg>') repeat;
+  mix-blend-mode:overlay;
+  /* animation:grain 7s steps(8) infinite; */
+}
+@keyframes orbFloat {
+  0%,100% { transform:translate(0px,0px) rotate(0deg); }
+  50% { transform:translate(50px,-40px) rotate(2deg); }
+}
+@keyframes grain { 0% { transform:translate(0,0); } 100% { transform:translate(3px,3px); } }
+
+.container { max-width:1100px; margin:0 auto; padding:48px 20px; position:relative; z-index:10; }
+
+header { display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; gap:12px; }
+h1 { font-size:35px; font-weight:700; margin:0; }
+p.sub { margin:2px 0 0; color:var(--muted); font-size:13px; }
+.controls { display:flex; align-items:center; gap:12px; }
+
+.btn {
+  display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px;
+  background:linear-gradient(90deg, #6366f157, #8b5cf6a8); color:white; font-weight:600;
+  text-decoration:none; transition:transform .2s ease;
+}
+.btn:hover { transform:translateY(-2px); box-shadow:0 15px 35px rgba(255,170,170,0.55); }
+
+.hero {
+  display:grid; grid-template-columns:360px 1fr; gap:28px; align-items:start; margin-bottom:36px;
+}
+@media (max-width:860px) {
+   header{flex-direction:column;}
+  .hero { grid-template-columns:1fr; }
+  .profile-wrap { order:-1; margin-bottom:12px; justify-content:center; }
+}
+
+.profile-wrap { display:flex; justify-content:center; align-items:flex-start; }
+.profile {
+  width:100%; max-width:420px; padding:20px; border-radius:14px; text-align:center;
+  position:relative; overflow:visible; transition:transform .35s ease; transform-origin:center;
+}
+.profile::before {
+  content:""; position:absolute; inset:0; border-radius:14px;
+  background:radial-gradient(420px 140px at 50% 20%, rgba(255,255,255,0.06), transparent 30%);
+  filter:blur(40px); opacity:0.75; transform:translateY(-8px); z-index:-1;
+}
+.profile-img {
+  width:200px; height:220px; object-fit:cover; border-radius:12px; display:block; margin:0 auto;
+  box-shadow:0 18px 40px rgba(0,0,0,0.35);
+  transition:transform .45s cubic-bezier(.2,.9,.3,1);
+}
+.profile:hover .profile-img { transform:scale(1.05) rotate(1deg); }
+.profile h3 { margin:12px 0 4px; font-size:18px; }
+.profile p { margin:0; color:var(--muted); font-size:13px; }
+
+.hero-text { display:flex; flex-direction:column; gap:12px; }
+.hero-title {
+  font-size:28px; font-weight:900; letter-spacing:-1px;
+  background:linear-gradient(90deg, #ffffff 0%, #ffaaaa 50%, #ffffff 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  background-size:200% 200%; animation:liquidFlow 7s ease-in-out infinite;
+  text-shadow:0 0 40px rgba(255,170,170,0.4);
+}
+@keyframes liquidFlow {
+  0%,100% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+}
+.lead { color:var(--muted); max-width:720px; margin-top:0; font-size:15px; }
+.hero-cta { display:flex; gap:10px; margin-top:8px; }
+
+.link {
+  padding:8px 12px; border-radius:10px; border:1px solid var(--glass-border);
+  background:#3c3b4178; font-weight:600; color:var(--text); text-decoration:none;
+  transition:all .3s ease;
+}
+.link:hover {
+  background:rgba(255,255,255,0.08);
+  border-color:rgba(255,170,170,0.4);
+  box-shadow:0 12px 35px rgba(255,170,170,0.22);
+  transform:translateY(-3px);
+}
+
+.primary {
+  background:linear-gradient(90deg, #4f46e53d, #7c3aed96);
+  color:white; border:none;
+}
+.primary:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(124,58,237,0.4);
+}
+
+.btn, .primary, #whatsappBtn {
+  background:linear-gradient(90deg, #ffffff 0%, var(--pink) 50%, #ffffff 100%) !important;
+  background-size:200% 200% !important;
+  color:#000 !important;
+  font-weight:700 !important;
+  animation:liquidFlow 7s ease-in-out infinite !important;
+  border:none !important;
+  box-shadow:0 8px 25px rgba(255,170,170,0.35) !important;
+}
+.btn:hover, .primary:hover, #whatsappBtn:hover {
+  transform:translateY(-4px) !important;
+  box-shadow:0 18px 40px rgba(255,170,170,0.5) !important;
+  animation-duration:2s !important;
+}
+
+.info-grid {
+  display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px;
+  font-size:13px; color:var(--muted);
+}
+.info-grid .k { font-size:11px; text-transform:uppercase; opacity:0.75; }
+.info-grid .v { font-weight:600; color:var(--text); margin-top:6px; }
+
+#viewProjectsBtn:hover svg { animation:pulsePlay .9s ease-in-out; transform:scale(1.15); }
+#viewProjectsBtn:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(49,47,50,.666); }
+@keyframes pulsePlay { 0%,100% {opacity:1;} 50% {opacity:0.7;} }
+
+.card-base {
+  padding:22px; border-radius:16px; background:var(--card);
+  border:1px solid var(--glass-border); backdrop-filter:blur(8px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.6);
+}
+
+#projects { margin-top:22px; }
+.projects-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.projects-header h3 { margin:0; font-size:20px; }
+.projects-header p { margin:0; color:var(--muted); }
+.projects { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:8px; }
+@media (max-width:900px) { .projects { grid-template-columns:1fr; } }
+
+.card {
+  padding:30px; border-radius:12px; background:var(--card);
+  border:1px solid var(--glass-border); backdrop-filter:blur(6px);
+  box-shadow:0 8px 30px rgba(2,6,23,0.06);
+  transition:transform .32s ease, box-shadow .32s ease;
+}
+.card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 18px 45px rgba(2,6,23,0.12);
+}
+.card h4 { margin:0 0 8px; font-size:16px; }
+.card p { margin:0; color:var(--muted); font-size:14px; }
+.tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.tag {
+  font-size:12px; padding:6px 8px; border:1px solid var(--glass-border);
+  border-radius:8px; color:var(--muted); background:transparent;
+}
+
+.two-cols { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:12px; }
+@media (max-width:900px) { .two-cols { grid-template-columns:1fr; } }
+.two-cols ul { margin:0; padding-left:18px; color:var(--muted); font-size:14px; list-style:disc; }
+.two-cols li { margin-bottom:6px; }
+
+.reveal { opacity:0; transform:translateY(18px); transition:opacity .62s ease, transform .62s ease; }
+.reveal.in-view { opacity:1; transform:none; }
+
+/* Timeline */
+.timeline { position:relative; padding-left:40px; }
+.timeline::before {
+  content:''; position:absolute; left:20px; top:0; bottom:0; width:2px;
+  background:linear-gradient(to bottom, transparent, var(--pink), transparent);
+  background-size:100% 200%; animation:flow 8s linear infinite;
+}
+.tl-item { position:relative; margin-bottom:38px; }
+.tl-item:last-child { margin-bottom:0; }
+.tl-year {
+  position:absolute; left:-70px; top:8px; font-size:13px; font-weight:700;
+  color:white; background:rgba(255,170,170,0.15); padding:4px 10px;
+  border-radius:20px; border:1px solid var(--pink); backdrop-filter:blur(8px);
+}
+.tl-card { margin-left:50px; transition:all .4s ease; }
+.tl-card:hover {
+  transform:translateX(12px);
+  border-color:var(--pink);
+  box-shadow:0 20px 40px rgba(255,170,170,0.2);
+}
+.tl-role { color:var(--pink); font-size:13px; margin:4px 0 8px; font-weight:600; }
+@keyframes flow { 0% { background-position:0 0; } 100% { background-position:0 200%; } }
+
+@media (max-width:680px) {
+  .tl-year { left:-60px; font-size:12px; }
+  .timeline { padding-left:30px; }
+  .timeline::before { left:15px; }
+  footer { flex-direction:column; gap:8px; text-align:center; }
+}
+
+footer {
+  margin-top:38px; border-top:1px solid rgba(255,170,170,0.2);
+  padding-top:14px; color:var(--pink); font-size:13px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+footer a { color:var(--pink); text-decoration:underline; }
+
+
+.spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(255, 170, 170, 0.18), 
+              transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: soft-light;
+}
+
+body:hover .spotlight {
+  opacity: 1;
+}
+
+/* Ultra-smooth mouse tracking */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    cursor: none;
+  }
+  body {
+    cursor: none;
+  }
+  /* Optional: tiny custom cursor */
+  * { cursor: inherit !important; }
+}
+</style>
+</head>
+
+<body>
+  <div class="spotlight"></div>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="film-dust" aria-hidden="true"></div>
+
+  <div class="bg-effects">
+  <div class="gradient-orbs"></div>
+  <div class="film-grain"></div>
+</div>
+
+  <div class="container" role="main">
+    <!-- Header -->
+    <header>
+    <div>
+        <h1>Portfolio</h1>
+        
+        <!-- LIVE DATE & TIME (with icons) -->
+        <div style="margin-top: 8px; display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--muted); opacity: 0.9;">
+        
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span id="liveTime"></span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <span id="liveDate"></span>
+        </div>
+        
+        </div>
+    </div>
+    
+    <div class="controls">
+        <a class="btn" href="./resume.pdf" download>Download Resume 
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        </a>
+    </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="profile-wrap reveal">
+        <aside class="profile card-base" id="profileCard" aria-label="Profile card">
+          <img src="./assets/avatar.webp" alt="Jagadeesh Chillapalli" class="profile-img" />
+          <h3>Jagadeesh Chillapalli</h3>
+          <p>Creative Photo & Video Editor</p>
+          <p id="quote">"Cinematic films that play, photos that pause forever"</p>
+        </aside>
+      </div>
+
+      <div class="hero-text card-base reveal" aria-labelledby="heroHeading">
+        <h2 id="heroHeading" class="hero-title">I don’t just edit — I make moments eternal</h2>
+        <p class="lead">
+          I am a creative Photo & video editor with 2+ years of experience specialising in capturing
+          unforgettable moments. I have a strong background in producing cinematic wedding videos,
+          executing professional colour grading, and creating compelling teasers. </p>
+
+        <div class="hero-cta">
+            <a href="#projects" class="link" id="viewProjectsBtn">
+            <span style="display:inline-flex; align-items:center; gap:8px">
+                <span style="margin-bottom: 3px;">View Projects</span> 
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <path d="M8 5v14l11-7L8 5z"/>
+                    </svg>
+            </span>
+            </a>
+            <a id="whatsappBtn" class="link primary" href="#" target="_blank" rel="noopener noreferrer">
+            <span style="display:inline-flex; align-items:center; gap:8px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.52 3.48A11.86 11.86 0 0012 .75C6.1.75 1.5 5.35 1.5 11.25c0 1.98.52 3.9 1.5 5.6L1 23l6.4-2.1a11.47 11.47 0 005.6 1.4c5.9 0 10.5-4.6 10.5-10.5 0-3.04-1.18-5.9-3.48-8.32zM12 20.63c-1.78 0-3.52-.48-5.02-1.38l-.36-.22L4 19l.96-2.62-.22-.36A8.5 8.5 0 013.5 11.25 8.5 8.5 0 0112 2.75c4.7 0 8.5 3.8 8.5 8.5S16.7 20 12 20z"/>
+                </svg>
+                
+                <span style="margin-bottom: 3px;">WhatsApp Me</span>     
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+                </svg>
+            </span>
+            </a>
+        </div>
+
+        <div class="info-grid">
+          <div><div class="k">Location</div><div class="v">Atmakur, Mangalagiri</div></div>
+          <div><div class="k">Phone</div><div class="v">7815823804</div></div>
+          <div><div class="k">Email</div><div class="v">jagadeeshchillapalli05@gmail.com</div></div>
+          <div><div class="k">Role</div><div class="v">Photo & Video Editor</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <section id="projects" class="reveal" aria-labelledby="projectsHeading">
+      <div class="projects-header">
+        <h3 id="projectsHeading">Edit Suites</h3>
+        <span style="display:inline-flex; align-items:center; gap:8px" >Photo & Video Magic
+        <svg width="24" height="24" viewBox="0 0 512 512" fill="white" xmlns="http://www.w3.org/2000/svg" class="magic-icon">
+        <path d="M0 0 C1.2 0.03 1.2 0.03 2.44 0.06 C7.63 9.19 12.71 18.38 17.69 27.63 C22.45 36.47 27.33 45.24 32.34 53.96 C35.54 59.56 38.57 65.22 41.5 70.96 C42.2 72.33 42.9 73.7 43.61 75.06 C44.64 77.07 45.67 79.08 46.66 81.1 C50.68 89.24 54.18 94.89 62.44 99.06 C63.44 99.62 64.45 100.18 65.48 100.75 C68.33 102.31 71.18 103.84 74.05 105.35 C77.18 107 80.3 108.66 83.42 110.32 C84.03 110.65 84.65 110.97 85.28 111.31 C90.82 114.25 96.3 117.29 101.77 120.35 C106.94 123.25 112.15 126.07 117.37 128.88 C121.44 131.07 125.51 133.28 129.57 135.5 C131.43 136.51 133.3 137.53 135.16 138.54 C137.6 139.86 140.02 141.21 142.44 142.56 C143.16 142.95 143.87 143.33 144.61 143.73 C147.45 145.35 149.19 146.41 150.38 149.53 C148.81 153.75 145.29 155.02 141.44 157.06 C140.54 157.56 139.64 158.05 138.71 158.56 C135.61 160.25 132.49 161.91 129.38 163.56 C120.92 168.08 112.51 172.68 104.19 177.44 C93.79 183.38 83.24 189.02 72.64 194.6 C70.26 195.85 67.88 197.12 65.52 198.4 C63.69 199.38 61.86 200.35 60 201.26 C53.73 204.59 51.33 209.72 48.25 215.94 C47.12 218.12 45.99 220.3 44.85 222.48 C44.28 223.59 43.72 224.69 43.13 225.83 C40.59 230.69 37.86 235.43 35.13 240.19 C30.36 248.54 25.79 256.98 21.29 265.47 C18.95 269.88 16.6 274.28 14.25 278.68 C13.11 280.8 11.98 282.93 10.85 285.05 C9.53 287.53 8.18 289.98 6.81 292.44 C6.45 293.13 6.08 293.83 5.71 294.54 C4.65 296.4 4.65 296.4 2.44 299.06 C-0.7 299.23 -0.7 299.23 -3.56 299.06 C-3.92 298.4 -4.27 297.73 -4.64 297.04 C-10.95 285.23 -17.29 273.44 -23.94 261.81 C-29.78 251.58 -35.34 241.21 -40.83 230.79 C-44.45 223.93 -48.16 217.16 -52.11 210.48 C-54.56 206.28 -54.56 206.28 -54.56 204.06 C-55.26 203.8 -55.95 203.54 -56.66 203.27 C-59.88 201.93 -62.9 200.36 -65.98 198.72 C-66.59 198.39 -67.2 198.07 -67.83 197.73 C-69.8 196.68 -71.78 195.62 -73.75 194.56 C-75.12 193.83 -76.49 193.1 -77.86 192.36 C-85.61 188.21 -93.33 184.02 -101 179.72 C-106.12 176.85 -111.27 174.04 -116.44 171.25 C-118.5 170.13 -120.57 169.02 -122.63 167.9 C-127.42 165.29 -132.22 162.71 -137.06 160.19 C-138.71 159.31 -140.35 158.44 -142 157.56 C-142.76 157.18 -143.51 156.79 -144.29 156.4 C-149.35 153.68 -149.35 153.68 -150.54 150.28 C-150.55 149.18 -150.55 149.18 -150.56 148.06 C-147.13 145.17 -143.73 142.93 -139.76 140.85 C-138.63 140.25 -137.5 139.65 -136.34 139.04 C-135.74 138.73 -135.15 138.42 -134.54 138.1 C-131.36 136.43 -128.2 134.75 -125.03 133.06 C-124.39 132.72 -123.75 132.38 -123.1 132.03 C-117.4 129 -111.79 125.83 -106.19 122.63 C-95.25 116.37 -84.14 110.44 -73 104.55 C-71.24 103.62 -69.48 102.67 -67.72 101.72 C-65.81 100.72 -63.87 99.75 -61.9 98.87 C-55.01 95.64 -52.57 90.88 -49.31 84.19 C-48.19 82 -47.07 79.82 -45.94 77.64 C-45.38 76.54 -44.82 75.43 -44.24 74.29 C-41.71 69.43 -38.99 64.69 -36.25 59.94 C-31.11 50.94 -26.22 41.84 -21.38 32.69 C-4.13 0.1 -4.13 0.1 0 0 Z" transform="translate(162.56,111.94)"/>
+        <path d="M0 0 C2.35 -0.21 2.35 -0.21 5 0 C6.37 1.36 6.37 1.36 7.44 3.31 C7.85 4.04 8.27 4.78 8.69 5.53 C9.34 6.76 9.34 6.76 10 8 C10.46 8.84 10.93 9.68 11.4 10.54 C12.96 13.37 14.48 16.21 16 19.06 C21.02 28.41 26.16 37.68 31.42 46.9 C31.92 47.77 32.42 48.64 32.93 49.54 C33.44 50.42 33.94 51.29 34.47 52.19 C36 55 36 55 37.45 58.28 C41.88 67.91 47.77 71.66 57 76 C58.34 76.67 59.68 77.34 61.02 78.01 C63.05 79.04 65.09 80.06 67.13 81.06 C73.41 84.16 79.49 87.57 85.56 91.06 C92.57 95.07 99.61 98.99 106.77 102.73 C109 104 109 104 111 106 C111.01 107.89 111.01 107.89 110 110 C107.94 111.44 106.02 112.61 103.8 113.77 C103.18 114.11 102.55 114.46 101.9 114.81 C100.59 115.53 99.27 116.24 97.95 116.95 C94.99 118.54 92.06 120.19 89.13 121.82 C87.4 122.78 85.66 123.74 83.92 124.69 C82.06 125.72 80.2 126.76 78.35 127.81 C72.4 131.13 66.48 134.3 60.24 137.08 C44.57 144.25 38.39 152.24 31.46 167.85 C29.06 173.02 26.18 177.89 23.31 182.81 C18.71 190.86 14.3 198.99 10.07 207.24 C9.69 207.97 9.31 208.7 8.93 209.46 C8.6 210.1 8.27 210.74 7.94 211.39 C7 213 7 213 5 215 C2.61 215.02 2.61 215.02 0 214 C-1.54 211.91 -2.65 210.04 -3.81 207.75 C-4.59 206.29 -5.37 204.83 -6.16 203.37 C-6.6 202.53 -7.04 201.69 -7.49 200.83 C-9.2 197.62 -10.96 194.44 -12.72 191.26 C-13.05 190.66 -13.38 190.07 -13.72 189.45 C-15.45 186.32 -17.2 183.19 -18.96 180.08 C-22.14 174.42 -25.15 168.87 -27.57 162.84 C-34.71 145.84 -46.97 140.27 -62.93 132.87 C-69.43 129.85 -75.61 126.41 -81.81 122.81 C-83.55 121.82 -85.28 120.82 -87.02 119.83 C-87.82 119.37 -88.63 118.91 -89.46 118.43 C-93.19 116.33 -96.97 114.31 -100.76 112.3 C-103 111 -103 111 -105 109 C-104.79 106.55 -104.44 105.39 -102.58 103.74 C-101.95 103.39 -101.33 103.03 -100.69 102.66 C-99.97 102.23 -99.24 101.81 -98.49 101.38 C-93.66 98.71 -88.81 96.09 -83.94 93.5 C-73.2 87.76 -62.57 81.86 -52 75.84 C-51.16 75.37 -50.33 74.89 -49.47 74.41 C-47.79 73.45 -46.1 72.49 -44.42 71.52 C-43.61 71.06 -42.81 70.6 -41.97 70.13 C-41.25 69.72 -40.54 69.31 -39.8 68.89 C-38 68 -38 68 -36 68 C-35.79 67.22 -35.57 66.43 -35.35 65.63 C-33.54 60.76 -30.98 56.48 -28.38 52 C-22.18 41.21 -16.29 30.28 -10.47 19.29 C-7.04 12.83 -3.6 6.38 0 0 Z" transform="translate(389,276)"/>
+        <path d="M0 0 C3.03 0.3 4.55 0.46 6.55 2.84 C6.99 3.65 7.43 4.46 7.88 5.29 C8.38 6.2 8.88 7.11 9.4 8.05 C9.93 9.04 10.46 10.04 11 11.06 C11.55 12.08 12.11 13.09 12.68 14.14 C13.86 16.3 15.03 18.46 16.19 20.63 C18.02 24.03 19.87 27.42 21.74 30.8 C22.93 32.97 24.12 35.14 25.31 37.31 C26.17 38.87 26.17 38.87 27.04 40.46 C27.56 41.41 28.08 42.37 28.61 43.36 C29.31 44.64 29.31 44.64 30.01 45.93 C31 48 31 48 31 50 C31.88 50.28 32.77 50.55 33.68 50.83 C36.71 51.9 39.35 53.12 42.17 54.65 C43.14 55.18 44.1 55.7 45.1 56.24 C46.12 56.8 47.14 57.36 48.19 57.94 C49.24 58.51 50.29 59.09 51.38 59.68 C54.59 61.45 57.79 63.22 61 65 C61.98 65.54 62.95 66.07 63.96 66.62 C66.63 68.09 69.28 69.57 71.94 71.06 C72.74 71.5 73.55 71.94 74.37 72.4 C75.11 72.81 75.84 73.23 76.59 73.66 C77.55 74.2 77.55 74.2 78.52 74.74 C80.4 76.34 80.63 77.61 81 80 C73.4 85.43 65.25 89.73 57 94.06 C55.02 95.11 53.04 96.16 51.05 97.2 C49.78 97.88 48.51 98.55 47.23 99.22 C42.99 101.46 38.79 103.78 34.64 106.19 C33 107 33 107 31 107 C30.79 107.77 30.58 108.54 30.37 109.34 C28.47 114.42 25.78 118.94 23.06 123.63 C19.58 129.68 16.11 135.73 12.87 141.92 C12.14 143.3 12.14 143.3 11.4 144.71 C10.48 146.45 9.58 148.21 8.69 149.97 C8.07 151.14 8.07 151.14 7.44 152.34 C7.09 153.02 6.73 153.71 6.37 154.42 C4.48 156.6 2.79 156.68 0 157 C-4.6 149.52 -8.82 141.88 -12.94 134.13 C-17.03 126.43 -21.22 118.83 -25.72 111.36 C-27 109 -27 109 -27 107 C-27.88 106.72 -28.77 106.45 -29.68 106.17 C-32.71 105.1 -35.35 103.88 -38.17 102.35 C-39.14 101.82 -40.1 101.3 -41.1 100.76 C-42.12 100.2 -43.14 99.64 -44.19 99.06 C-45.24 98.49 -46.29 97.91 -47.38 97.32 C-50.59 95.55 -53.79 93.78 -57 92 C-57.98 91.46 -58.95 90.93 -59.96 90.38 C-62.63 88.91 -65.28 87.43 -67.94 85.94 C-68.74 85.5 -69.55 85.06 -70.37 84.6 C-71.11 84.19 -71.84 83.77 -72.59 83.34 C-73.55 82.8 -73.55 82.8 -74.52 82.26 C-76.4 80.66 -76.63 79.39 -77 77 C-70.66 72.92 -64.14 69.3 -57.5 65.75 C-49.49 61.45 -41.51 57.1 -33.65 52.54 C-29.21 50 -29.21 50 -27 50 C-26.73 49.3 -26.47 48.6 -26.2 47.88 C-24.92 44.8 -23.44 41.92 -21.88 38.98 C-21.26 37.82 -20.64 36.66 -20 35.46 C-19.33 34.23 -18.67 32.99 -18 31.75 C-17.67 31.13 -17.33 30.5 -16.99 29.86 C-11.57 19.76 -5.95 9.8 0 0 Z" transform="translate(339,21)"/>
+        </svg>
+        </span>
+      </div>
+
+      
+      <div class="projects">
+
+        <article class="card reveal">
+          <h4>Portrait & Photo Retouching</h4>
+          <p>Magazine-grade skin retouching, cinematic color grading, and artistic composites that turn photos into timeless art.</p>
+          <div class="tags">
+            <span class="tag">Photoshop</span>
+            <span class="tag">Lightroom</span>
+            <span class="tag">Retouching</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h4>Cinematic video Highlight</h4>
+          <p>Full-length video highlight with advanced color grading and story-driven edits.</p>
+          <div class="tags">
+            <span class="tag">Premiere Pro</span>
+            <span class="tag">DaVinci Resolve</span>
+            <span class="tag">Color Grading</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h4>Social Teaser Series</h4>
+          <p>Short-form, punchy teasers optimized for Instagram and YouTube Shorts.</p>
+          <div class="tags">
+            <span class="tag">After Effects</span>
+            <span class="tag">Canva</span>
+            <span class="tag">Teaser</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h4>Event Documentary</h4>
+          <p>Multi-camera edit assembled into a documentary-style piece.</p>
+          <div class="tags">
+            <span class="tag">Multi-cam</span>
+            <span class="tag">Storytelling</span>
+            <span class="tag">Editing</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="reveal" aria-labelledby="skillsHeading" style="margin-top:22px">
+      <h3 id="skillsHeading" style="margin:0 0 12px">Craft & Arsenal</h3>
+      <div class="two-cols">
+        <div class="card">
+          <h4 style="margin:0 0 8px">Editing & Production</h4>
+          <ul>
+            <li>Photo Editing (Photoshop)</li>
+            <li>Video Editing (Premiere Pro, DaVinci Resolve)</li>
+            <li>Motion Graphics & VFX (After Effects)</li>
+            <li>Color Grading & LUTs</li>
+            <li>Camera Handling & Multi-cam workflows</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4 style="margin:0 0 8px">Tools</h4>
+          <ul>
+            <li>Photoshop</li>
+            <li>Adobe Premiere Pro</li>
+            <li>After Effects</li>
+            <li>DaVinci Resolve</li>
+            <li>Canva</li>
+            <li>MS Office</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE TIMELINE -->
+<section class="reveal" style="margin-top: 38px" aria-labelledby="expHeading">
+  <h3 id="expHeading" style="margin:0 0 20px; font-size:20px">Experience Timeline</h3>
+  
+  <div class="timeline">
+    <!-- 2023 - Present -->
+    <div class="tl-item">
+      <div class="tl-year">2022 — Present</div>
+      <div class="tl-card card">
+        <h4>Photo & Video Editor — Freelance</h4>
+        <p class="tl-role">Cinematic Wedding Films & Social Reels</p>
+        <p>Delivered 100+ wedding highlight films with 4K color grading, viral Instagram teasers, and magazine-grade photo retouching for clients across India.</p>
+        <div class="tags">
+          <span class="tag">Photoshop</span>
+          <span class="tag">DaVinci Resolve</span>
+          <span class="tag">Premiere Pro</span>
+          <span class="tag">After Effects</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2022 - 2023 -->
+    <!-- <div class="tl-item">
+      <div class="tl-year">2022 — 2023</div>
+      <div class="tl-card card">
+        <h4>Photo & Video Editor — Studio LightRoom</h4>
+        <p class="tl-role">Full-time Editor</p>
+        <p>Edited 120+ projects including pre-wedding shoots, birthday reels, and corporate promos. Mastered multi-cam sync and advanced skin retouching workflows.</p>
+        <div class="tags">
+          <span class="tag">Photoshop</span>
+          <span class="tag">After Effects</span>
+          <span class="tag">Team Workflow</span>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- 2021 - 2022 -->
+    <!-- <div class="tl-item">
+      <div class="tl-year">2021 — 2022</div>
+      <div class="tl-card card">
+        <h4>Junior Editor — Creative Hut</h4>
+        <p class="tl-role">First Professional Role</p>
+        <p>Started my journey with YouTube vlogs and short films. Learned color theory, sound design, and built a portfolio that landed my first wedding client.</p>
+        <div class="tags">
+          <span class="tag">Learning Phase</span>
+          <span class="tag">Premiere Pro</span>
+          <span class="tag">Passion Project</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</section>
+
+    <!-- Footer -->
+    <footer>
+      <div>© <span id="year"></span> Jagadeesh Chillapalli —Photo & Video Editor</div>
+      <!-- <div style="display:flex;gap:12px">
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+      </div> -->
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // WhatsApp link
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const number = "917815823804";
+    const message = encodeURIComponent("Hi Jagadeesh — I'm interested in your video editing services. Could we discuss a project?");
+    whatsappBtn.href = `https://wa.me/${number}?text=${message}`;
+
+    // Profile parallax
+    const profileCard = document.getElementById('profileCard');
+    if (profileCard) {
+      profileCard.addEventListener('mousemove', (e) => {
+        const rect = profileCard.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const img = profileCard.querySelector('.profile-img');
+        img.style.transform = `translate(${x * 0.02}px, ${y * 0.02}px) scale(1.03) rotate(${x * 0.01}deg)`;
+      });
+
+      profileCard.addEventListener('mouseleave', () => {
+        const img = profileCard.querySelector('.profile-img');
+        img.style.transform = '';
+      });
+
+      // Live Date & Time (DD/MM/YYYY)
+        function updateDateTime() {
+            const now = new Date();
+            
+            // Date: 07/11/2025
+            const date = now.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+            });
+            
+            // Time: 03:45 PM
+            const time = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+            }).replace(/AM|PM/i, m => m.toLowerCase());
+            
+            document.getElementById('liveDate').textContent = date;
+            document.getElementById('liveTime').textContent = time;
+        }
+
+        // Update immediately + every second
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    }
+  </script>
+</body>
+</html>
