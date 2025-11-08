@@ -598,9 +598,21 @@
 
         @media (max-width:440px) {
 
-            .hero-cta{
+            .hero-cta {
                 flex-direction: column;
                 width: fit-content;
+            }
+
+        }
+
+        @media (max-width:580px) {
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .two-cols {
+                grid-template-columns: 1fr;
             }
 
         }
@@ -651,13 +663,6 @@
                 left: 60px;
             }
 
-            .projects {
-                grid-template-columns: 1fr;
-            }
-
-            .two-cols {
-                grid-template-columns: 1fr;
-            }
         }
 
         /* Ultra-smooth mouse tracking */
